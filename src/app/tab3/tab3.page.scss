@@ -1,0 +1,53 @@
+.top-header{
+  --background: #232b2b;
+}
+
+.title{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.home-icon{
+  color: white;
+  position: absolute;
+  right: 5%;
+}
+
+.nav-icon{
+  color: white;
+  position: absolute;
+  left: 2%;
+  top: 8%;
+  width: 36px;
+  z-index: 100;
+}
+
+.no-margin-top{
+  margin-top: 0;
+}
+
+.curr-header {
+  background: #696969;
+  color: white;
+  padding: 10px;
+  // font-weight: bold;
+}
+
+.curr-list{
+  padding: 10px;
+}
+
+.even{
+  background: #f4f0ec; 
+}
+
+.star-icon{
+  position:relative;
+  top: calc(58% - 10px);
+  left: 34%;
+}
+
+.favourite{
+  color: #eee600;
+}

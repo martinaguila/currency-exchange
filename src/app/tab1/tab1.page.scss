@@ -1,0 +1,47 @@
+.top-header{
+  --background: #232b2b;
+}
+
+.title{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-icon{
+  color: white;
+  position: absolute;
+  left: 2%;
+  top: 8%;
+  width: 36px;
+  z-index: 100;
+}
+
+.curr-header {
+  background: #696969;
+  color: white;
+  padding: 10px;
+  // font-weight: bold;
+}
+
+.curr-list{
+  padding: 10px;
+}
+
+.even{
+  background: #f4f0ec; 
+}
+
+.arrow-icon{
+  position: absolute;
+  right: 5%;
+  top: 30%;
+}
+
+.row{
+  position: relative;
+}
+
+.font-black{
+  color: black;
+}

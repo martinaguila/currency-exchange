@@ -1,17 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
+  <ion-toolbar class="top-header">
+    <ion-menu-button class="nav-icon"></ion-menu-button>
+    <ion-title class="title">
+      Foreign Exchange Rate
     </ion-title>
+    <ion-icon class="home-icon" (click)="toHome()" name="home" slot="end"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-content>
+    <ion-card class="no-margin-top">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+      <!-- <ion-searchbar placeholder="Search Currency Code" (ionChange)="search($event)"></ion-searchbar> -->
+
+      <ion-list class="no-margin-top">
+        <div>
+          <ion-list>
+            <ion-row>
+              <ion-col class="curr-header" *ngFor="let head of tableHeader">
+                {{head}}
+              </ion-col>
+            </ion-row>
+            <ion-row 
+              class="row" 
+              *ngFor="let rate of currenciesArr; index as k" 
+              [ngClass]="(k % 2 == 0) ? 'odd' : 'even'">
+              <!-- <ion-icon class="arrow-icon" name="arrow-forward-circle-outline"></ion-icon> -->
+              <ion-col size="3">
+                {{rate.code}}
+              </ion-col>
+              <ion-col size="7">
+                {{rate.currency}}
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon (click)="addToFave(1, rate.code, 'Added to favourites!')" *ngIf="rate.isFav == 0" class="star-icon" name="star-outline"></ion-icon>
+                <ion-icon (click)="addToFave(0, rate.code, 'Removed from favourites!')"*ngIf="rate.isFav == 1" class="star-icon favourite" name="star"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </div>
+        
+      </ion-list>
+    </ion-card>
+  </ion-content>
 </ion-content>

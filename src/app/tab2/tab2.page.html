@@ -1,17 +1,83 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
+  <ion-toolbar class="top-header">
+    <ion-menu-button class="nav-icon"></ion-menu-button>
+    <ion-title class="title">
+      Foreign Exchange Rate
     </ion-title>
+    <ion-icon class="home-icon" (click)="toHome()" name="home" slot="end"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-row>
+        <ion-col>
+          Currency Code: <b>{{currCode}}</b>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Date 1</ion-label>
+            <ion-input
+              value="{{ date | date: 'YYYY-MM-dd' }}"
+              id="date"
+              class="ion-text-end"
+              (ionChange)="getDate($event)"
+            ></ion-input>
+            <ion-popover trigger="date" size="cover">
+              <ng-template>
+                <ion-datetime
+                  presentation="date"
+                  [(ngModel)]="date"
+                ></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Date 2</ion-label>
+            <ion-input
+              value="{{ dateCompare | date: 'YYYY-MM-dd' }}"
+              id="dateCompare"
+              class="ion-text-end"
+              (ionChange)="getDateCompare($event)"
+            ></ion-input>
+            <ion-popover trigger="dateCompare" size="cover">
+              <ng-template>
+                <ion-datetime
+                  presentation="date"
+                  [(ngModel)]="dateCompare"
+                ></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="open">
+        <ion-list>
+          <ion-row>
+            <ion-col class="curr-header" *ngFor="let head of tableHeader">
+              {{head}}
+            </ion-col>
+          </ion-row>
+          <ion-row 
+            class="row" 
+            *ngFor="let rate of currentRates; index as k" 
+            [ngClass]="(k % 2 == 0) ? 'odd' : 'even'"
+            (click)="rateDetail(rate)">
+            <ion-col class="curr-list" [ngClass]="i === 3? 'center': ''" *ngFor="let r of rate; index as i">
+            <span *ngIf="i !== 3">{{r}}</span>
+            <span *ngIf="i === 3"><ion-icon [ngClass]="r === 'arrow-down-outline'? 'red' : 'green'" style name="{{r}}"></ion-icon></span>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </div>
+      
+    </ion-list>
+  </ion-card>
 </ion-content>

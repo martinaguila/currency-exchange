@@ -1,17 +1,57 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
+  <ion-toolbar class="top-header">
+    <ion-menu-button class="nav-icon"></ion-menu-button>
+    <ion-title class="title">
+      Foreign Exchange Rate
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-content>
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label>Base Currency</ion-label>
+          <ion-select 
+            placeholder="Select code" 
+            (ionChange)="convertAllCurency($event, 'all')"
+            [(ngModel)]="selectedAllBaseCurr">
+            <ion-select-option 
+              *ngFor="let currency of currencies" 
+              value="{{currency.code}}"
+              >{{currency.code}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+        <div *ngIf="currRatesAll">
+          <ion-row>
+            <ion-col class="font-black">
+              Currency Exchange Rate as of <strong>{{ rateTime | date: 'MMMM, dd yyyy' }}</strong>
+            </ion-col>
+          </ion-row>
+  
+          <ion-list>
+            <ion-row>
+              <ion-col class="curr-header" *ngFor="let head of tableHeader">
+                {{head}}
+              </ion-col>
+            </ion-row>
+            <ion-row 
+              class="row" 
+              *ngFor="let rate of currRatesAll; index as k" 
+              [ngClass]="(k % 2 == 0) ? 'odd' : 'even'"
+              (click)="rateDetail(rate)">
+              <ion-icon class="arrow-icon" name="arrow-forward-circle-outline"></ion-icon>
+              <ion-col class="curr-list"  *ngFor="let r of rate; index as i">
+                {{r}}
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </div>
+        
+      </ion-list>
+    </ion-card>
+  </ion-content>
 </ion-content>

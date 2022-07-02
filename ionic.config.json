@@ -1,5 +1,9 @@
 {
   "name": "currency",
   "integrations": {},
-  "type": "angular"
+  "type": "angular",
+  "proxies": [{
+        "path": "/api",
+        "proxyUrl": "https://api.apilayer.com/"
+    }]
 }

@@ -1,0 +1,62 @@
+.top-header{
+  --background: #232b2b;
+}
+
+.title{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.home-icon{
+  color: white;
+  position: absolute;
+  right: 5%;
+}
+
+.nav-icon{
+  color: white;
+  position: absolute;
+  left: 2%;
+  top: 8%;
+  width: 36px;
+  z-index: 100;
+}
+
+.curr-header {
+  background: #696969;
+  color: white;
+  padding: 10px;
+  // font-weight: bold;
+  text-align: center;
+  font-size: 12px;
+}
+
+.curr-list{
+  padding: 10px 0px 10px 5px;
+  font-size: 12px;
+}
+
+.even{
+  background: #f4f0ec; 
+}
+
+.row{
+  position: relative;
+}
+
+.pos-absolute{
+  position: absolute;
+}
+
+.red{
+  color: #ff3d3d;
+}
+
+.green{
+  color: #32cd32;
+}
+
+.center{
+  text-align: center;
+}
