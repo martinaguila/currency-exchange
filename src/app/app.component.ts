@@ -13,7 +13,12 @@ export class AppComponent {
 
   appPages = [
     {
-      title: 'Settings',
+      title: 'Home',
+      url: '/tabs/tab1',
+      icon: 'home'
+    },
+    {
+      title: 'Currency Settings',
       url: '/tabs/tab3',
       icon: 'settings'
     }

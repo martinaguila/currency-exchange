@@ -34,11 +34,17 @@
   
           <ion-list>
             <ion-row>
-              <ion-col class="curr-header" *ngFor="let head of tableHeader">
+              <!-- <ion-col class="curr-header" *ngFor="let head of tableHeader">
                 {{head}}
+              </ion-col> -->
+              <ion-col class="curr-header" size="5">
+                Currency
+              </ion-col>
+              <ion-col class="curr-header" size="7">
+                Rate
               </ion-col>
             </ion-row>
-            <ion-row 
+            <!-- <ion-row 
               class="row" 
               *ngFor="let rate of currRatesAll; index as k" 
               [ngClass]="(k % 2 == 0) ? 'odd' : 'even'"
@@ -46,6 +52,19 @@
               <ion-icon class="arrow-icon" name="arrow-forward-circle-outline"></ion-icon>
               <ion-col class="curr-list"  *ngFor="let r of rate; index as i">
                 {{r}}
+              </ion-col>
+            </ion-row> -->
+            <ion-row 
+            *ngFor="let rate of currRatesAll; index as k"
+            [ngClass]="(k % 2 == 0) ? 'odd' : 'even'"
+            (click)="rateDetail(rate.code)">
+              <ion-col class="curr-list" size="5">
+                {{rate.code}}
+              </ion-col>
+              <ion-col class="curr-list" size="7">
+                {{rate.currency}}
+                <ion-icon class="arrow-icon" name="arrow-forward-circle-outline"></ion-icon>
+                <ion-icon class="star-icon favourite" *ngIf="rate.isFav == 1" name="star"></ion-icon>
               </ion-col>
             </ion-row>
           </ion-list>
