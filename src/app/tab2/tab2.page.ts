@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ExchangeService } from '../../services/exchange.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab2',
@@ -21,7 +22,8 @@ export class Tab2Page {
   constructor(
     private exchangeService: ExchangeService,
     private loadingCtrl: LoadingController,
-    private router: Router
+    private router: Router,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit(){
@@ -44,15 +46,18 @@ export class Tab2Page {
   }
 
   public loadCurrentRates(currCode,date){
-    // this.loader();
+    this.open = false;
+    this.loader();
     this.exchangeService.historical1(currCode,date).subscribe(
       (res: any) => {
         let resultset: any = res;
-        console.log(resultset)
         const entries = Object.entries(resultset.rates);
         this.currentRates = entries;
-        // this.dismiss();
+        this.dismiss();
+        this.presentToast('Select date 2');
       }, (error: any) => {
+        this.dismiss();
+        this.presentToast('Something went wrong.');
         console.log(error);
     });
   }
@@ -60,16 +65,25 @@ export class Tab2Page {
   public getDate(e){
     this.date1 = e.detail.value;
     this.tableHeader[1] = this.date1 + " Rate";
+    let d1 = new Date(this.date1);
+    let dnow = new Date();
+    if (d1.getTime() > dnow.getTime()) return this.presentToast('Invalid date.');
     this.loadCurrentRates(this.currCode, this.date1);
   }
   
   public getDateCompare (e){
     this.tableHeader[2] = e.detail.value + " Rate";
     this.open = true;
+    let d1 = new Date(e.detail.value);
+    let dnow = new Date();
+    if (d1.getTime() > dnow.getTime()) return this.presentToast('Invalid date.');
     this.exchangeService.historical2(this.currCode,e.detail.value).subscribe(
       (res: any) => {
+        // this.loader();
+        // setTimeout(function(){
+        //   this.dismiss();
+        // }, 1000);
         let resultset: any = res;
-        console.log(resultset)
         const entries = Object.entries(resultset.rates);
         entries.forEach(x=>{
           this.currentRates.forEach((c,index)=>{
@@ -84,12 +98,26 @@ export class Tab2Page {
             }
           });
         });
+        // setTimeout(function(){
+        //   this.dismiss();
+        // }, 1000);
+        // this.dismiss();
       }, (error: any) => {
+        this.dismiss();
+        this.presentToast('Something went wrong.');
         console.log(error);
     });
   }
 
   public toHome(){
     this.router.navigate(['/tabs/tab1'])
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 1000
+    });
+    toast.present();
   }
 }

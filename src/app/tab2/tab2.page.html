@@ -46,6 +46,7 @@
               id="dateCompare"
               class="ion-text-end"
               (ionChange)="getDateCompare($event)"
+              [disabled]="open"
             ></ion-input>
             <ion-popover trigger="dateCompare" size="cover">
               <ng-template>
