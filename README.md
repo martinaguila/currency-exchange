@@ -33,3 +33,7 @@ default to EUR.
 NOTE: The api for checking currency using base currency code is not working. It is always 
 default to EUR.
 ```
+
+### Tech versions
+Angular - 14.0.3
+Ionic - 5.4.16
