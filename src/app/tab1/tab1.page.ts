@@ -28,7 +28,6 @@ export class Tab1Page {
   ngOnInit(){
     this.currencies = JSON.parse(localStorage.getItem("currencies"));
     localStorage.setItem("currencies", JSON.stringify(this.currencies));
-    console.log(JSON.parse(localStorage.getItem("currencies")))
   }
 
   loader(){

@@ -20,7 +20,6 @@ export class Tab3Page {
 
   ngOnInit(){
     this.currenciesArr = JSON.parse(localStorage.getItem("currencies"));
-    console.log(this.currenciesArr)
   }
 
   public toHome(){
@@ -48,7 +47,6 @@ export class Tab3Page {
         x.isFav = status;
       }
     });
-    console.log(this.currenciesArr);
     localStorage.setItem("currencies", JSON.stringify(this.currenciesArr));
     this.presentToast(msg);
   }

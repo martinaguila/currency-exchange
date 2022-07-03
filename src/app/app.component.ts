@@ -25,7 +25,6 @@ export class AppComponent {
   ];
 
   ngOnInit(){
-    console.log(localStorage.getItem("currencies"))
     if (localStorage.getItem("currencies")){
 
     }else{

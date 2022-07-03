@@ -48,14 +48,11 @@ export class ExchangeService {
   }
 
   historical1(baseCurr, date){
-    date = date.toString();
-    console.log(`https://currency-conversion-and-exchange-rates.p.rapidapi.com/${date}`)
-    console.log(`https://currency-conversion-and-exchange-rates.p.rapidapi.com/2020-01-04`)
     const httpHeaders: HttpHeaders = new HttpHeaders()
       .set("Content-Type", "application/json")
       .set('X-RapidAPI-Key', '60b0e5d27emsh30f02830e3bf27ap18da2djsneaea909cabe1')
       .set('X-RapidAPI-Host', 'currency-conversion-and-exchange-rates.p.rapidapi.com')
-    return this.http.get(`https://currency-conversion-and-exchange-rates.p.rapidapi.com/2022-01-01`,{ headers: httpHeaders }).pipe(map(res => res));
+    return this.http.get(`https://currency-conversion-and-exchange-rates.p.rapidapi.com/${date}`,{ headers: httpHeaders }).pipe(map(res => res));
   }
 
   historical2(baseCurr, date){
@@ -63,6 +60,6 @@ export class ExchangeService {
       .set("Content-Type", "application/json")
       .set('X-RapidAPI-Key', '60b0e5d27emsh30f02830e3bf27ap18da2djsneaea909cabe1')
       .set('X-RapidAPI-Host', 'currency-conversion-and-exchange-rates.p.rapidapi.com')
-    return this.http.get(`https://currency-conversion-and-exchange-rates.p.rapidapi.com/2020-01-01`,{ headers: httpHeaders }).pipe(map(res => res));
+    return this.http.get(`https://currency-conversion-and-exchange-rates.p.rapidapi.com/${date}`,{ headers: httpHeaders }).pipe(map(res => res));
   }
 }

@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { ExchangeService } from '../../services/exchange.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Plugins } from "@capacitor/core";
-import { DatePickerPluginInterface } from "@capacitor-community/date-picker";
-const DatePicker: DatePickerPluginInterface = Plugins.DatePickerPlugin as any;
-const selectedTheme = "dark"
+
 
 @Component({
   selector: 'app-tab2',
@@ -31,20 +28,9 @@ export class Tab2Page {
 
   ngOnInit(){
     this.currCode = localStorage.getItem("currCode");
-    DatePicker
-  .present({
-    mode: "date",
-    locale: "pt_BR",
-    format: "dd/MM/yyyy",
-    date: "28/06/2021",
-    theme: selectedTheme,
-  })
-  .then((date) => console.log(date.value));
-
   }
 
   loader(){
-    console.log("load")
     this.loadingCtrl.create({  
       message: 'Fetching data...'  
     }).then((res) => {   
@@ -56,7 +42,6 @@ export class Tab2Page {
   }
 
   dismiss(){
-    console.log("dismiss")
     this.loadingCtrl.dismiss(); 
   }
 
@@ -66,7 +51,6 @@ export class Tab2Page {
     this.exchangeService.historical1(currCode,date).subscribe(
       (res: any) => {
         let resultset: any = res;
-        console.log(resultset)
         const entries = Object.entries(resultset.rates);
         this.currentRates = entries;
         this.dismiss();
@@ -81,12 +65,18 @@ export class Tab2Page {
   public getDate(e){
     this.date1 = e.detail.value;
     this.tableHeader[1] = this.date1 + " Rate";
+    let d1 = new Date(this.date1);
+    let dnow = new Date();
+    if (d1.getTime() > dnow.getTime()) return this.presentToast('Invalid date.');
     this.loadCurrentRates(this.currCode, this.date1);
   }
   
   public getDateCompare (e){
     this.tableHeader[2] = e.detail.value + " Rate";
     this.open = true;
+    let d1 = new Date(e.detail.value);
+    let dnow = new Date();
+    if (d1.getTime() > dnow.getTime()) return this.presentToast('Invalid date.');
     this.exchangeService.historical2(this.currCode,e.detail.value).subscribe(
       (res: any) => {
         // this.loader();
@@ -94,7 +84,6 @@ export class Tab2Page {
         //   this.dismiss();
         // }, 1000);
         let resultset: any = res;
-        console.log(resultset)
         const entries = Object.entries(resultset.rates);
         entries.forEach(x=>{
           this.currentRates.forEach((c,index)=>{
